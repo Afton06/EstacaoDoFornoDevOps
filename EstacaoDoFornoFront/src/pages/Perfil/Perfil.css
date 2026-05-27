@@ -1,0 +1,64 @@
+.perfil-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F3E9DC;
+  padding: 3rem 2rem;
+}
+
+.perfil-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(75, 44, 32, 0.1);
+  padding: 3rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.perfil-topo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.perfil-topo h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #4b2c20;
+  margin-bottom: 0.4rem;
+}
+
+.perfil-topo p {
+  color: #9c7b6e;
+  font-size: 0.95rem;
+}
+
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.perfil-erro-api {
+  font-size: 0.88rem;
+  color: #b94040;
+  background-color: #fdf0f0;
+  border: 1px solid #f0c0c0;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+
+.perfil-sucesso-msg {
+  font-size: 0.88rem;
+  color: #3b6d11;
+  background-color: #eaf3de;
+  border: 1px solid #c0dd97;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+
+.perfil-logout {
+  margin-top: 1.5rem;
+}

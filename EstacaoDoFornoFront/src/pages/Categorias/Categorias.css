@@ -1,0 +1,128 @@
+.categorias-container {
+  width: 100%;
+  padding: 2rem;
+}
+
+.categorias-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.categorias-topo h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #4b2c20;
+}
+
+.categorias-erro {
+  font-size: 0.88rem;
+  color: #b94040;
+  background-color: #fdf0f0;
+  border: 1px solid #f0c0c0;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.categorias-carregando {
+  color: #9c7b6e;
+  font-size: 0.95rem;
+}
+
+.categorias-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(75, 44, 32, 0.08);
+}
+
+.categorias-tabela th {
+  background-color: #4b2c20;
+  color: #F3E9DC;
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.categorias-tabela td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #f0e8e0;
+  color: #3a1f16;
+  font-size: 0.95rem;
+}
+
+.categorias-tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.categorias-tabela tr:hover td {
+  background-color: #fdf9f6;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.ativo {
+  background-color: #eaf3de;
+  color: #27500a;
+}
+
+.status-badge.inativo {
+  background-color: #fcebeb;
+  color: #791f1f;
+}
+
+.categoria-form-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(75, 44, 32, 0.08);
+  padding: 2rem;
+  max-width: 520px;
+}
+
+.categoria-form-campos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.categoria-select {
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #d9c4b8;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #3a1f16;
+  background: #fdf9f6;
+  outline: none;
+  cursor: pointer;
+}
+
+.categoria-select:focus {
+  border-color: #5E3023;
+  box-shadow: 0 0 0 3px rgba(94, 48, 35, 0.08);
+}
+
+.categoria-form-acoes {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
