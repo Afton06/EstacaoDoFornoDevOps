@@ -1,15 +1,21 @@
 FROM node:lts AS builder
 
-WORKDIR /the/workdir/path
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
 
 COPY . .
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
-RUN npm install
 RUN npm run build
 
-EXPOSE 3000
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["node", "dist/server.js"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
 # docker build -t estacaodofornofront:v0.0.1 .
-# docker run estacaodofornofront:v0.0.1
+# docker run -p 80:80 estacaodofornofront:v0.0.1

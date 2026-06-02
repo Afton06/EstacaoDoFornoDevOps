@@ -1,38 +1,52 @@
 version: '3.9'
 services:
   database:
-    image: mysql:8.0
-    container_name: mysql-db
+    image: postgres:15
+    container_name: postgres-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: edulivre
-      MYSQL_USER: my_user
-      MY_PASSWORD: user_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2212
+      POSTGRES_DB: estacao_do_forno_db
     ports:
-      - "3000:3000"
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
     networks:
       - app-network
-    # volumes:
-    #  - db_data:/var/lib/mysql
+
   backend:
     build:
-      context: ../EstacaoDoFornoBack
+      context: ./EstacaoDoFornoBack
       dockerfile: Dockerfile
     container_name: backend
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:2212@database:5432/estacao_do_forno_db
+      - JWT_SECRET=estacao_do_forno_secret_2026
+    networks:
+      - app-network
 
   frontend:
     build:
-      context: ../EstacaoDoFornoFront
+      context: ./EstacaoDoFornoFront
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://backend:3001
     container_name: frontend
     ports:
       - "80:80"
     depends_on:
       - backend
-
-    network:
+    networks:
       - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
