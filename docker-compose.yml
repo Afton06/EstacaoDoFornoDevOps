@@ -1,0 +1,52 @@
+version: '3.9'
+services:
+  database:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2212
+      POSTGRES_DB: estacao_do_forno_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./EstacaoDoFornoBack
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:2212@database:5432/estacao_do_forno_db
+      - JWT_SECRET=estacao_do_forno_secret_2026
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./EstacaoDoFornoFront
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://backend:3001
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
