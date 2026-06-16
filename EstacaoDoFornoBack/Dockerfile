@@ -1,16 +1,15 @@
-FROM node:lts AS builder
+﻿FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
 
 COPY . .
 
-RUN npm install
+RUN DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy npx prisma generate
 RUN npm run build
 
-<<<<<<< HEAD
-=======
 EXPOSE 3001
 
->>>>>>> c88325dd21f6fed9d219f9a6bb4fb1a13a0bccc5
 CMD ["node", "dist/server.js"]
-
-# docker build -t estacaodofornoback:v0.0.1 .
-# docker run estacaodofornoback:v0.0.1
