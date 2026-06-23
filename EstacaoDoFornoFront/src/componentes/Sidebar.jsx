@@ -10,7 +10,7 @@ function Sidebar() {
   const filtroAtual = params.get('categoria') || 'todos';
 
   useEffect(() => {
-    fetch("http://localhost:3001/categorias")
+    fetch("/api/categorias")
       .then((res) => res.json())
       .then((data) => {
         if (data && Array.isArray(data.dados)) {

@@ -6,6 +6,7 @@ interface AuthContextData {
   token: string | null
   estaLogado: boolean
   isAdmin: boolean
+  carregandoAuth: boolean
   salvarLogin: (token: string, usuario: UsuarioLogado) => void
   logout: () => void
 }
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null)
   const [usuario, setUsuario] = useState<UsuarioLogado | null>(null)
+  const [carregandoAuth, setCarregandoAuth] = useState(true)
 
   useEffect(() => {
     const tokenSalvo = localStorage.getItem('token')
@@ -24,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setToken(tokenSalvo)
       setUsuario(JSON.parse(usuarioSalvo))
     }
+    setCarregandoAuth(false)
   }, [])
 
   function salvarLogin(novoToken: string, novoUsuario: UsuarioLogado) {
@@ -40,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUsuario(null)
   }
 
-  const isAdmin = usuario?.isAdmin === true
+  const isAdmin = !!usuario?.isAdmin
 
   return (
     <AuthContext.Provider
@@ -49,6 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         token,
         estaLogado: !!token,
         isAdmin,
+        carregandoAuth,
         salvarLogin,
         logout,
       }}

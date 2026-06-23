@@ -28,7 +28,8 @@ function Home() {
       .finally(() => setCarregando(false));
   }, []);
 
-  const categorias = [...new Set(produtos.map(p => p.categoria?.descricao).filter(Boolean))];
+  const categorias = [...new Set(produtos.map(p => p.categoria?.descricao).filter(Boolean))]
+  .sort((a, b) => a.localeCompare(b, 'pt-BR'));
 
   const produtosFiltrados = filtroAtivo === 'todos'
     ? produtos
